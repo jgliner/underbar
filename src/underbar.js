@@ -98,6 +98,12 @@
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array) {
+    var arrTemp = [];
+    return _.filter(array, function(item) {
+      var arrTempIndex = _.indexOf(arrTemp, item) === -1;
+      arrTemp.push(item)
+      return arrTempIndex;
+    })
   };
 
 
