@@ -320,6 +320,13 @@
   // input array. For a tip on how to make a copy of an array, see:
   // http://mdn.io/Array.prototype.slice
   _.shuffle = function(array) {
+    var mappingClone = array.slice();
+    return _.map(array, function() {
+      var rando = Math.floor(Math.random() * (mappingClone.length));
+      var selected = mappingClone[rando];
+      mappingClone.splice(rando, 1);
+      return selected;
+    })
   };
 
 
