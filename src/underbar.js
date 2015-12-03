@@ -380,6 +380,16 @@
   //
   // Hint: Use Array.isArray to check if something is an array
   _.flatten = function(nestedArray, result) {
+    result = result || [];
+    return _.reduce(nestedArray, function(flattened, item) {
+      if (Array.isArray(item)) {
+        _.flatten(item, result);
+      }
+      else {
+        flattened.push(item);
+      }
+      return result;
+    }, result)
   };
 
   // Takes an arbitrary number of arrays and produces an array that contains
