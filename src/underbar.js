@@ -406,6 +406,12 @@
   // Take the difference between one array and a number of other arrays.
   // Only the elements present in just the first array will remain.
   _.difference = function(array) {
+    var args = Array.prototype.slice.call(arguments);
+    return _.filter(args[0], function(item) {
+      if (_.every(args.slice(1), function(arr) {return !(_.contains(arr, item))})) {
+        return item;
+      }
+    })
   };
 
   // Returns a function, that, when invoked, will only be triggered at most once
