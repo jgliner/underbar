@@ -420,5 +420,25 @@
   //
   // Note: This is difficult! It may take a while to implement.
   _.throttle = function(func, wait) {
+    var canExecute = true;
+    var queue = [];
+    var throttled = function() {
+      _.delay(function() {
+        if (queue.length > 0) {
+          (queue.shift())();
+        }
+      }, wait);
+    }
+    var args = Array.prototype.slice.call(arguments)
+    return function() {
+      if (!canExecute) {
+        queue.push(func);
+      }
+      else {
+        func.apply(null, args);
+        canExecute = false;
+        throttled();
+      }
+    }
   };
 }());
